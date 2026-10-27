@@ -42,7 +42,7 @@ const ribbonWords=siteconfig.ribbon.map(function(entry){return '<span class="rwo
 document.getElementById('ribbonA').innerHTML=ribbonItems+ribbonItems+ribbonItems+ribbonItems
 document.getElementById('ribbonB').innerHTML=ribbonWords+ribbonWords+ribbonWords+ribbonWords
 document.getElementById('mottoText').innerHTML=mottoText.split(' ').map(function(word){return '<span class="mw">'+word+'</span>'}).join(' ')
-document.getElementById('idxList').innerHTML=siteconfig.videos.map(function(video,index){return '<a class="idx reveal" href="visual-works.html" data-cursor="View" data-video="'+video.file+'"><span class="idxnum">'+PadTwo(index+1)+'</span><span class="idxname">'+video.name+'</span><span class="idxtag">'+(video.tag||'')+'</span><span class="idxgo">View</span></a>'}).join('')
+document.getElementById('idxList').innerHTML=siteconfig.videos.map(function(video,index){return '<a class="idx reveal" href="visual-works.html#'+video.group.toLowerCase()+'" data-cursor="View" data-video="'+video.file+'"><span class="idxnum">'+PadTwo(index+1)+'</span><span class="idxname">'+video.name+'</span><span class="idxtag">'+(video.tag||'')+'</span><span class="idxgo">View</span></a>'}).join('')
 document.getElementById('homeLead').innerHTML=Highlight(profile.lead)
 const badgeLoop=(mottoText.toUpperCase()+' &bull; ').repeat(2)
 document.getElementById('badge').innerHTML='<svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="badgePath" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs><text><textPath href="#badgePath" textLength="510" lengthAdjust="spacing">'+badgeLoop+'</textPath></text></svg><img src="Logo.png" alt="">'
@@ -54,30 +54,30 @@ document.getElementById('aboutIntro').textContent=profile.intro
 }
 const reels=document.getElementById('reels')
 if(reels){
-const tagList=['All'].concat(siteconfig.videos.map(function(video){return video.tag}).filter(function(tag,index,list){return tag&&list.indexOf(tag)===index}))
-reels.insertAdjacentHTML('beforebegin','<div class="chips" id="chips">'+tagList.map(function(tag,index){return '<button class="chip mag'+(index===0?' on':'')+'" data-tag="'+tag+'">'+tag+'</button>'}).join('')+'</div>')
-siteconfig.videos.forEach(function(video,index){
+siteconfig.groups.forEach(function(group,groupIndex){
+const groupVideos=siteconfig.videos.filter(function(video){return video.group===group.id})
+const block=document.createElement('div')
+block.className='workgroup'
+block.id=group.id.toLowerCase()
+block.innerHTML='<div class="grouphead reveal"><span class="groupnum">'+PadTwo(groupIndex+1)+'</span><h2 class="grouptitle">'+group.id+'</h2><span class="groupcount">'+PadTwo(groupVideos.length)+' '+(groupVideos.length===1?'Work':'Works')+'</span></div><p class="groupintro reveal">'+group.intro+'</p><div class="work"></div>'
+const list=block.querySelector('.work')
+groupVideos.forEach(function(video,index){
 const reel=document.createElement('article')
 reel.className='piece reveal'
-reel.dataset.tag=video.tag||''
-reel.innerHTML='<div class="piecehead"><h2 class="piecename"><span class="piecenum">'+PadTwo(index+1)+'</span>'+video.name+'</h2><span class="piecemeta">'+(video.tag||'')+'<span class="piecetime"></span></span></div><div class="piecemedia"><video class="piecevideo" src="'+video.file+(video.poster?'" poster="'+video.poster:'#t=0.1')+'" controls preload="metadata" playsinline></video></div>'+(video.description?'<p class="piecedesc">'+video.description+'</p>':'')
+reel.innerHTML='<div class="piecehead"><h3 class="piecename"><span class="piecenum">'+PadTwo(index+1)+'</span>'+video.name+'</h3><span class="piecemeta">'+(video.tag||'')+'<span class="piecetime"></span></span></div><div class="piecemedia"><video class="piecevideo" src="'+video.file+(video.poster?'" poster="'+video.poster:'#t=0.1')+'" controls preload="metadata" playsinline></video></div>'+(video.description?'<p class="piecedesc">'+video.description+'</p>':'')
 const player=reel.querySelector('video')
 const timeLabel=reel.querySelector('.piecetime')
 player.addEventListener('loadedmetadata',function(){
 const totalSeconds=Math.round(player.duration)
 timeLabel.textContent=' / '+Math.floor(totalSeconds/60)+':'+String(totalSeconds%60).padStart(2,'0')
 })
-reels.appendChild(reel)
+list.appendChild(reel)
+})
+reels.appendChild(block)
 })
 document.addEventListener('play',function(event){
 document.querySelectorAll('video.piecevideo').forEach(function(other){if(other!==event.target)other.pause()})
 },true)
-document.getElementById('chips').addEventListener('click',function(event){
-const chip=event.target.closest('.chip')
-if(!chip)return
-document.querySelectorAll('.chip').forEach(function(other){other.classList.toggle('on',other===chip)})
-reels.querySelectorAll('.piece').forEach(function(piece){piece.hidden=chip.dataset.tag!=='All'&&piece.dataset.tag!==chip.dataset.tag})
-})
 }
 const panels=document.getElementById('panels')
 if(panels)panels.innerHTML=siteconfig.skills.map(function(skill,index){return '<div class="skill spot tilt reveal"><div class="skillhead"><span class="skillnum">'+PadTwo(index+1)+'</span><img src="'+skill.icon+'" alt=""></div><h3 class="skilltitle">'+skill.title+'</h3><p class="skilldesc">'+skill.description+'</p></div>'}).join('')
