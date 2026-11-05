@@ -12,7 +12,7 @@ lead:'I am 65VI9, a developer focused on UI/UX Design alongside Programming. I b
 },
 contact:{
 discord:'1353531657948237864',
-discordhandle:'dnhamax',
+discordhandle:'dawfwooii',
 roblox:'https://www.roblox.com/users/11207514564/profile',
 email:'sixfiveveenine@gmail.com',
 github:''
@@ -35,9 +35,9 @@ groups:[
 {id:'Systems',intro:'Gameplay systems written from scratch, built to plug straight into a project.'}
 ],
 skills:[
-{title:'UI Design',icon:'Icons/web.png',description:'Interface layout, color systems and typography kept consistent across every screen a product ships with.'},
-{title:'UX Design',icon:'Icons/user.png',description:'User flows optimized to reduce friction and stay accessible for a wide range of users.'},
-{title:'Programming',icon:'Icons/code.png',description:'Backend systems and logic built to integrate directly with the interface they support.'},
-{title:'Project Management',icon:'Icons/idea.png',description:'Planning and coordinating work so projects stay organized, on schedule and aligned with the team.'}
+{title:'UI Design',icon:'Icons/web.png',description:'Consistent layouts, color systems and typography, polished down to the smallest button and tuned to look right on every screen size.'},
+{title:'UX Design',icon:'Icons/user.png',description:'Lag-aware design for mobile players: lighter frames, fewer tweens running at once, and flows that need fewer taps.'},
+{title:'Programming',icon:'Icons/code.png',description:'Every line of code is part of the system\'s character, written to be fast, clean and creative enough to surprise players.'},
+{title:'Project Management',icon:'Icons/idea.png',description:'Planning, tracking progress and fixing problems early so group projects ship on time and stay aligned.'}
 ]
 }
