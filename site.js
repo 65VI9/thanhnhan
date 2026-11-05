@@ -3,6 +3,7 @@ const pages=[
 {id:'home',href:'index.html',label:'Home'},
 {id:'about',href:'about.html',label:'About'},
 {id:'works',href:'visual-works.html',label:'Works'},
+{id:'code',href:'code.html',label:'Code'},
 {id:'practice',href:'practice.html',label:'Practice'},
 {id:'contact',href:'contact.html',label:'Contact'}
 ]
@@ -79,6 +80,49 @@ document.addEventListener('play',function(event){
 document.querySelectorAll('video.piecevideo').forEach(function(other){if(other!==event.target)other.pause()})
 },true)
 }
+const luaTokens=/("(?:\\.|[^"\\\n])*")|\b(local|function|end|if|then|else|elseif|for|in|do|while|return|and|or|not|break)\b|\b(true|false|nil)\b|\b(\d+(?:\.\d+)?)\b|\b([A-Za-z_]\w*)(?=\()/g
+function EscapeHtml(text){return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function HighlightLine(line){
+let html=''
+let cursor=0
+let match
+luaTokens.lastIndex=0
+while((match=luaTokens.exec(line))!==null){
+html+=EscapeHtml(line.slice(cursor,match.index))
+const kind=match[1]?'s':match[2]?'k':(match[3]||match[4])?'n':'f'
+html+='<span class="tk-'+kind+'">'+EscapeHtml(match[0])+'</span>'
+cursor=match.index+match[0].length
+}
+return html+EscapeHtml(line.slice(cursor))
+}
+function CopyText(text){
+if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(text)
+return Promise.reject(new Error('no clipboard'))
+}
+const codeList=document.getElementById('codes')
+if(codeList)siteconfig.codes.forEach(function(entry,index){
+const source=sourcecodes[entry.file]
+const lines=source.split('\n')
+const folded=lines.length>36
+const piece=document.createElement('article')
+piece.className='piece reveal'
+piece.innerHTML='<div class="piecehead"><h3 class="piecename"><span class="piecenum">'+PadTwo(index+1)+'</span>'+entry.name+'</h3><span class="piecemeta">'+entry.tag+'</span></div><p class="piecedesc">'+entry.summary+'</p><ul class="codepoints">'+entry.points.map(function(point){return '<li>'+point+'</li>'}).join('')+'</ul><p class="codeneeds">'+entry.needs+'</p><div class="codebox'+(folded?' fold':'')+'"><div class="codebar"><span>'+entry.file+'</span><span>'+lines.length+' lines</span><button class="codecopy" type="button">Copy</button></div><pre class="codepre"><code>'+lines.map(function(line){return '<span class="cl">'+HighlightLine(line)+'</span>'}).join('')+'</code></pre>'+(folded?'<button class="codemore" type="button">Show full file</button>':'')+'</div>'
+const copyButton=piece.querySelector('.codecopy')
+copyButton.addEventListener('click',function(){
+CopyText(source).then(function(){copyButton.textContent='Copied'}).catch(function(){
+copyButton.textContent='Press Ctrl+C'
+console.warn('[PORTFOLIO] clipboard blocked, select the code by hand')
+})
+setTimeout(function(){copyButton.textContent='Copy'},1800)
+})
+const moreButton=piece.querySelector('.codemore')
+if(moreButton)moreButton.addEventListener('click',function(){
+const box=piece.querySelector('.codebox')
+const isFolded=box.classList.toggle('fold')
+moreButton.textContent=isFolded?'Show full file':'Collapse'
+})
+codeList.appendChild(piece)
+})
 const panels=document.getElementById('panels')
 if(panels)panels.innerHTML=siteconfig.skills.map(function(skill,index){return '<div class="skill spot tilt reveal"><div class="skillhead"><span class="skillnum">'+PadTwo(index+1)+'</span><img src="'+skill.icon+'" alt=""></div><h3 class="skilltitle">'+skill.title+'</h3><p class="skilldesc">'+skill.description+'</p></div>'}).join('')
 const contactList=document.getElementById('clinks')
