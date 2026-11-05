@@ -12,7 +12,7 @@ lead:'I am 65VI9, a developer focused on UI/UX Design alongside Programming. I b
 },
 contact:{
 discord:'1353531657948237864',
-discordhandle:'dawfwooii',
+discordhandle:'dnhamax',
 roblox:'https://www.roblox.com/users/11207514564/profile',
 email:'sixfiveveenine@gmail.com',
 github:''
@@ -30,14 +30,19 @@ videos:[
 {group:'UIs',file:'Videos/Video4.mp4',poster:'Videos/Video4.jpg',name:'Classic User Interface Framework',tag:'Roblox Studio',description:'Classic UI framework in action: event HUD with shield, reset and vote kick controls, a Troll menu with player actions, spectate switching and a Store with item purchases, running in Roblox Studio.'},
 {group:'Systems',file:'Videos/Video5.mp4',poster:'Videos/Video5.jpg',name:'Helix Engine',tag:'Roblox Studio',description:'FPS gun system running in first person in Roblox Studio, with a hotbar for switching between the AK105 and AK103 and live weapon handling against a line of dummy targets.'}
 ],
+codes:[
+{name:'Notification',file:'Notification.lua',tag:'Client and Server',summary:'Server fires a notice, client stacks it in a slide queue. Sending the same id refreshes the live notice instead of adding another.',points:['Id based refresh','Queue reflow with tweens','Max 5 on screen'],needs:'Needs Shared/Remotes with AnnouncementFire, a Notification ScreenGui and an AnnouncementTemplate label under the module.'},
+{name:'SquadDataStore',file:'SquadDataStore.lua',tag:'Server',summary:'DataStore layer for squads: unique name lock, rollback when a create step fails, member and request indexes, capped audit log.',points:['Name lock with UpdateAsync','Rollback on failed create','Ordered paging'],needs:'Standalone. Only uses DataStoreService.'},
+{name:'VoteKick',file:'VoteKick.lua',tag:'Server',summary:'The server decides everything, the client only sends a vote.',points:['Cooldown per player','Majority needed'],needs:'Needs Shared/Config (ban time, minimum players, request cooldown) and Shared/Remotes (VoteKickRequest, VoteKickSync).'}
+],
 groups:[
 {id:'UIs',intro:'Interface systems built for group projects: menus, HUDs, stores and customizers.'},
 {id:'Systems',intro:'Gameplay systems written from scratch, built to plug straight into a project.'}
 ],
 skills:[
-{title:'UI Design',icon:'Icons/web.png',description:'Consistent layouts, color systems and typography, polished down to the smallest button and tuned to look right on every screen size.'},
-{title:'UX Design',icon:'Icons/user.png',description:'Lag-aware design for mobile players: lighter frames, fewer tweens running at once, and flows that need fewer taps.'},
-{title:'Programming',icon:'Icons/code.png',description:'Every line of code is part of the system\'s character, written to be fast, clean and creative enough to surprise players.'},
-{title:'Project Management',icon:'Icons/idea.png',description:'Planning, tracking progress and fixing problems early so group projects ship on time and stay aligned.'}
+{title:'UI Design',icon:'Icons/web.png',description:'Consistent layouts, colors and typography on every screen size.'},
+{title:'UX Design',icon:'Icons/user.png',description:'Flows tuned for mobile players, with lag in mind.'},
+{title:'Programming',icon:'Icons/code.png',description:'Systems written from scratch and wired straight into the interface.'},
+{title:'Project Management',icon:'Icons/idea.png',description:'Keeping group projects planned and on schedule.'}
 ]
 }
