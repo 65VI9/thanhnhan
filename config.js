@@ -12,7 +12,7 @@ lead:'I am 65VI9, a developer focused on UI/UX Design alongside Programming. I b
 },
 contact:{
 discord:'1353531657948237864',
-discordhandle:'dnhamax',
+discordhandle:'dawfwooii',
 roblox:'https://www.roblox.com/users/11207514564/profile',
 email:'sixfiveveenine@gmail.com',
 github:''
@@ -28,6 +28,7 @@ videos:[
 {group:'UIs',file:'Videos/Video2.mp4',name:'SFPD Locker System',tag:'Roblox Studio',description:'Customizer with accessory slots, skin tones, clothing selection and a saved outfits panel with save and delete.'},
 {group:'UIs',file:'Videos/Video3.mp4',name:'Global War Main Menu',tag:'In game',description:'Loadout, Squad and Shop menus running in game. Squad covers members, requests and role permissions, and Shop runs a gamepass purchase.'},
 {group:'UIs',file:'Videos/Video4.mp4',poster:'Videos/Video4.jpg',name:'Classic User Interface Framework',tag:'Roblox Studio',description:'Classic UI framework in action: event HUD with shield, reset and vote kick controls, a Troll menu with player actions, spectate switching and a Store with item purchases, running in Roblox Studio.'},
+{group:'UIs',file:'Videos/Video6.mp4',poster:'Videos/Video6.jpg',name:'Cartoony Simulator UI',tag:'Roblox Studio',description:'Simulator style UI with chunky outlines and sunburst art, built in Roblox Studio: a side menu with Rebirth, Shop, Inventory and Trade buttons, a Store frame with template perks, and a Rebirth frame with rewards and a requirement bar.'},
 {group:'Systems',file:'Videos/Video5.mp4',poster:'Videos/Video5.jpg',name:'Helix Engine',tag:'Roblox Studio',description:'FPS gun system running in first person in Roblox Studio, with a hotbar for switching between the AK105 and AK103 and live weapon handling against a line of dummy targets.'}
 ],
 codes:[
